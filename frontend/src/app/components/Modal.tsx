@@ -43,6 +43,18 @@ export default function ModalComponent({
     }, 500);
   };
 
+  function formatDate(dateString: string) {
+    const date = new Date(dateString);
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${day}/${month}/${year} - ${hours}:${minutes}h`;
+  }
+
   if (isOpen && !isEditable) {
     return (
       <div className="fixed flex flex-col gap-4 size-96 p-10 mx-80 z-10 bg-slate-700 text-white">
@@ -53,10 +65,10 @@ export default function ModalComponent({
           <b>Nome: </b> {title}
         </span>
         <span>
-          <b>Data inicial: </b> {start}
+          <b>Data inicial: </b> {formatDate(start)}
         </span>
         <span>
-          <b>Data final:</b> {end}
+          <b>Data final:</b> {formatDate(end)}
         </span>
         <span>
           <b>Identificador:</b> {id}
